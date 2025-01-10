@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isochron App</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Kontener mapy -->
+    <div id="map"></div>
+    
+    <!-- Wybór czasu podróży -->
+    <label for="timeSelect">Wybierz czas podróży:</label>
+    <select id="timeSelect">
+        <option value="5">5 minut</option>
+        <option value="15">15 minut</option>
+        <option value="30">30 minut</option>
+    </select>
+    
+    <!-- Przyciski do generowania izochrony -->
+    <div id="transport-buttons">
+        <button id="carBtn" class="transport">Samochód</button>
+        <button id="footBtn" class="transport">Pieszo</button>
+        <button id="bikeBtn" class="transport">Rower</button>
+    </div>
+
+    <!-- Przyciski do kontrolowania widoczności poligonów -->
+    <div id="control-buttons">
+        <button id="hidePolygonsBtn" class="control">Ukryj Poligony</button>
+        <button id="showPolygonsBtn" class="control">Pokaż Poligony</button>
+        <button id="removePolygonsBtn" class="control">Usuń Poligony</button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

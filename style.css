@@ -1,0 +1,136 @@
+/* Resetowanie marginesów i paddingów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 20px;
+}
+
+#map {
+    width: 100%;
+    height: 60vh;  /* Zmniejszenie wysokości mapy */
+    margin-bottom: 20px;
+    border-radius: 10px; /* Zaokrąglenie rogów mapy */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodanie subtelnego cienia */
+}
+
+/* Kontener dla całej strony */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 16px;
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+/* Stylizacja select */
+select {
+    background-color: #fff;
+    color: #007BFF;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    padding: 10px;
+    width: 150px;
+    font-size: 16px;
+}
+
+select:hover {
+    border-color: #0056b3;
+}
+
+/* Stylowanie przycisków */
+button, select {
+    font-size: 16px;
+    padding: 12px 20px;
+    margin: 8px;
+    border: none;
+    border-radius: 8px; /* Zaokrąglone rogi */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Przyciski transportu */
+button.transport {
+    background-color: #007BFF;
+    color: white;
+}
+
+button.transport:hover {
+    background-color: #0056b3;
+}
+
+/* Przyciski do działań z poligonami */
+button.control {
+    background-color: #28a745;
+    color: white;
+}
+
+button.control:hover {
+    background-color: #218838;
+}
+
+/* Oddzielenie grup przycisków */
+#transport-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#control-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Zmniejszenie dolnego panelu */
+button, select {
+    font-size: 16px;
+    padding: 10px 15px;
+    margin: 6px;
+}
+
+/* Przyciski w grupie transportu (przyciski transportu) */
+#transport-buttons button {
+    width: 30%; /* Mniejsze przyciski */
+}
+
+/* Grupa przycisków z poligonami (kontrolki) */
+#control-buttons button {
+    width: 30%; /* Mniejsze przyciski */
+}
+
+/* Stylizacja na urządzenia mobilne */
+@media (max-width: 768px) {
+    #map {
+        height: 50vh;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    select {
+        width: 120px;
+    }
+
+    button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    #control-buttons, #transport-buttons {
+        flex-direction: column;
+    }
+}
