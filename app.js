@@ -1,5 +1,5 @@
 // Inicjalizacja mapy
-var map = L.map('map').setView([54.37324226722646, 18.615535036114153], 12); // Ustawienie na Warszawę
+var map = L.map('map').setView([54.37324226722646, 18.615535036114153], 12); 
 
 // Dodanie warstwy mapy (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -131,6 +131,55 @@ function removePolygons() {
     poligony = []; // Czyszczenie tablicy z poligonami
 }
 
+// Funkcja pobierająca miejsca w obrębie izochrony
+function recommendPlaces() {
+    if (poligony.length === 0) {
+        alert("Najpierw wygeneruj izochronę.");
+        return;
+    }
+
+    // Pobierz pierwszą izochronę (dla uproszczenia)
+    var polygonLayer = poligony[0];
+
+    // Pobierz współrzędne izochrony w formacie GeoJSON
+    var bounds = polygonLayer.getBounds();
+
+    // Konwersja bounds do Overpass API bounding box
+    var bbox = `${bounds.getSouth()},${bounds.getWest()},${bounds.getNorth()},${bounds.getEast()}`;
+
+    // Zapytanie do Overpass API dla POI
+    var overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"](${bbox});out;`;
+
+    // Wysłanie zapytania
+    fetch(overpassUrl)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Miejsca w obrębie izochrony:", data);
+
+            // Wyczyszczenie listy miejsc
+            var placesList = document.getElementById("places-list");
+            placesList.innerHTML = "";
+
+            // Wyświetlanie miejsc na mapie i w liście
+            data.elements.forEach(element => {
+                if (element.lat && element.lon && element.tags.name) {
+                    // Dodaj marker na mapie
+                    L.marker([element.lat, element.lon])
+                        .addTo(map)
+                        .bindPopup(element.tags.name);
+
+                    // Dodaj miejsce do listy
+                    var listItem = document.createElement("li");
+                    listItem.textContent = element.tags.name;
+                    placesList.appendChild(listItem);
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Błąd podczas pobierania miejsc:", error);
+        });
+}
+
 // Dodanie event listenerów dla przycisków
 document.getElementById('carBtn').addEventListener('click', function() {
     generateIsochron('car'); // Samochód
@@ -144,7 +193,6 @@ document.getElementById('bikeBtn').addEventListener('click', function() {
     generateIsochron('bike'); // Rower
 });
 
-// Dodanie event listenerów dla przycisków do kontroli widoczności poligonów
 document.getElementById('hidePolygonsBtn').addEventListener('click', function() {
     hidePolygons(); // Ukrywanie poligonów
 });
@@ -155,4 +203,9 @@ document.getElementById('showPolygonsBtn').addEventListener('click', function() 
 
 document.getElementById('removePolygonsBtn').addEventListener('click', function() {
     removePolygons(); // Usuwanie poligonów
+});
+
+// Dodanie event listenera dla przycisku "Rekomenduj miejsca"
+document.getElementById('recommendPlacesBtn').addEventListener('click', function() {
+    recommendPlaces();
 });

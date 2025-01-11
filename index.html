@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isochron App</title>
+    <title>Transport Time App</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -36,6 +36,13 @@
         <button id="hidePolygonsBtn" class="control">Ukryj Poligony</button>
         <button id="showPolygonsBtn" class="control">Pokaż Poligony</button>
         <button id="removePolygonsBtn" class="control">Usuń Poligony</button>
+        <button id="recommendPlacesBtn" class="control">Rekomenduj Miejsca</button>
+    </div>
+
+    <!-- Lista miejsc -->
+    <div id="places-list-container">
+        <h3>Rekomendowane miejsca:</h3>
+        <ul id="places-list"></ul>
     </div>
 </div>
 

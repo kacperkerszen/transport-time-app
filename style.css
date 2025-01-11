@@ -79,6 +79,16 @@ button.control:hover {
     background-color: #218838;
 }
 
+/* Przyciski "Rekomenduj miejsca" */
+button#recommendPlacesBtn {
+    background-color: #ffc107; /* Żółty kolor */
+    color: #333; /* Ciemny tekst */
+}
+
+button#recommendPlacesBtn:hover {
+    background-color: #e0a800; /* Ciemniejszy żółty */
+}
+
 /* Oddzielenie grup przycisków */
 #transport-buttons {
     display: flex;
